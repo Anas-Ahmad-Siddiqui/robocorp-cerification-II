@@ -13,6 +13,7 @@ Library           RPA.PDF
 Library           RPA.Archive
 Library           RPA.Robocloud.Secrets
 Library           RPA.Dialogs
+Library           Process
 # -
 
 *** Keywords ***
@@ -33,7 +34,6 @@ Get orders
 Close the annoying modal
     Click Button    OK
 
-# +
 *** Keywords  ***
 Fill the form
     [Arguments]     ${row}
@@ -41,9 +41,6 @@ Fill the form
     Select Radio Button     body     ${row}[Body]
     Input Text  class:form-control    ${row}[Legs]
     Input Text  id:address      ${row}[Address]
-    
-    
-# -
 
 *** Keywords ***
 Preview the robot
@@ -56,7 +53,7 @@ clicking order button
 
 *** Keywords ***
 Submit the order
-     Wait Until Keyword Succeeds    1 min  0.5 sec    clicking order button
+     Wait Until Keyword Succeeds    1 min  0.3 sec    clicking order button
 
 *** Keywords ***
 Store the receipt as a PDF file    
@@ -104,4 +101,7 @@ Order robots from RobotSpareBin Industries Inc
          Go to order another robot
     END
     Create a ZIP file of the receipts
+    Terminate All Processes
+
+
 
